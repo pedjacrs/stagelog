@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StageLog — Start Free Trial</title>
+<link rel="icon" href="/icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;min-height:100vh;background:linear-gradient(135deg,#0f0f0f 0%,#1a1a2e 50%,#16213e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:#fff;}
+.container{width:100%;max-width:480px;}
+.logo-wrap{display:flex;align-items:center;gap:12px;margin-bottom:40px;justify-content:center;}
+.logo-img{width:48px;height:48px;border-radius:12px;}
+.logo-name{font-size:24px;font-weight:700;color:#fff;}
+.logo-tag{font-size:12px;color:#C9A84C;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.card{background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:36px;}
+h1{font-size:24px;font-weight:700;margin-bottom:6px;}
+.sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px;}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:#C9A84C;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;margin-bottom:20px;}
+.fg{margin-bottom:16px;}
+label{display:block;font-size:13px;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:6px;}
+input,select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 14px;font-size:14px;color:#fff;font-family:'Outfit',sans-serif;outline:none;transition:border .2s;}
+input::placeholder{color:rgba(255,255,255,.3);}
+input:focus,select:focus{border-color:rgba(201,168,76,.6);background:rgba(255,255,255,.1);}
+select option{background:#1a1a2e;color:#fff;}
+.btn{width:100%;padding:13px;background:linear-gradient(135deg,#C9A84C,#e8c56a);border:none;border-radius:10px;font-size:15px;font-weight:700;color:#1a1a2e;cursor:pointer;margin-top:8px;transition:opacity .2s;font-family:'Outfit',sans-serif;}
+.btn:hover{opacity:.9;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.err{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5;font-size:13px;padding:10px 14px;border-radius:8px;margin-bottom:16px;display:none;}
+.success{display:none;text-align:center;padding:20px 0;}
+.success .icon{font-size:48px;margin-bottom:16px;}
+.success h2{font-size:20px;font-weight:700;margin-bottom:8px;}
+.success p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.6;}
+.success .creds{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:16px;margin:20px 0;text-align:left;}
+.success .creds div{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:6px;}
+.success .creds span{color:#C9A84C;font-weight:600;font-family:monospace;}
+.login-btn{display:block;width:100%;padding:13px;background:linear-gradient(135deg,#C9A84C,#e8c56a);border:none;border-radius:10px;font-size:15px;font-weight:700;color:#1a1a2e;cursor:pointer;text-align:center;text-decoration:none;margin-top:16px;font-family:'Outfit',sans-serif;}
+.perks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+.perk{display:flex;align-items:center;gap:8px;font-size:12.5px;color:rgba(255,255,255,.6);}
+.perk svg{flex-shrink:0;color:#C9A84C;}
+.divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:24px 0;}
+.footer{text-align:center;font-size:12px;color:rgba(255,255,255,.3);margin-top:24px;}
+.footer a{color:rgba(201,168,76,.7);text-decoration:none;}
+.info-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 24px;margin-bottom:16px;}
+.info-box h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.info-box p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;}
+.info-box ul{list-style:none;padding:0;}
+.info-box ul li{font-size:13px;color:rgba(255,255,255,.5);padding:4px 0;display:flex;align-items:center;gap:8px;}
+.info-box ul li::before{content:"✓";color:#C9A84C;font-weight:700;flex-shrink:0;}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px;}
+.plan.featured{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08);}
+.plan-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.plan-price{font-size:11px;color:rgba(255,255,255,.4);}
+.plan.featured .plan-price{color:#C9A84C;}
+.contact-form input,.contact-form textarea,.contact-form select{margin-bottom:12px;}
+.contact-form textarea{resize:vertical;min-height:90px;color:#fff;}
+.tabs-nav{display:flex;gap:0;background:rgba(255,255,255,.05);border-radius:10px;padding:3px;margin-bottom:24px;}
+.tab-btn{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.4);border:none;background:none;font-family:'Outfit',sans-serif;transition:all .15s;}
+.tab-btn.active{background:rgba(201,168,76,.2);color:#C9A84C;}
+.tab-pane{display:none;}.tab-pane.active{display:block;}
+.notice{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:10px 14px;font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:16px;line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo-wrap">
+    <img src="/icon.png" class="logo-img" onerror="this.style.display='none'">
+    <div>
+      <div class="logo-name">StageLog</div>
+      <div class="logo-tag">Event Production Management</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <!-- Tabs -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="showTab('trial')">Free Trial</button>
+      <button class="tab-btn" onclick="showTab('pricing')">Pricing</button>
+      <button class="tab-btn" onclick="showTab('contact')" id="tab-contact-btn">Contact</button>
+    </div>
+
+    <!-- TAB: FREE TRIAL -->
+    <div class="tab-pane active" id="tab-trial">
+      <div id="form-wrap">
+        <div class="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          14-day free trial · No credit card required
+        </div>
+        <h1>Start your free trial</h1>
+        <p class="sub">Set up your company in seconds and explore all features.</p>
+        <div class="perks">
+          <div class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Schedule management</div>
+          <div class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Time tracking</div>
+          <div class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Crew & vehicle management</div>
+          <div class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Project tracking</div>
+        </div>
+        <hr class="divider">
+        <div class="notice">⚠️ During the trial you get full access to all features. After 14 days your account will be paused — contact us to continue with a paid plan.</div>
+        <div style="text-align:center;margin-bottom:16px;">
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:8px;">Want to explore first?</div>
+          <button class="btn" onclick="tryDemo()" id="demo-btn" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);font-weight:600;font-size:13px;padding:10px 20px;">
+            ▶ Try Live Demo — no signup needed
+          </button>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;">Uses Apex Live Events demo account · Read-only data</div>
+        </div>
+        <hr class="divider" style="margin:8px 0 16px;">
+        <div class="err" id="err-msg"></div>
+        <div class="fg"><label>Company Name *</label><input type="text" id="r-company" placeholder="e.g. Apex Live Events" maxlength="80"></div>
+        <div class="fg"><label>Your Full Name *</label><input type="text" id="r-name" placeholder="e.g. James Mitchell" maxlength="80"></div>
+        <div class="fg"><label>Work Email *</label><input type="email" id="r-email" placeholder="you@company.com" maxlength="120"></div>
+        <div class="fg"><label>Number of Employees</label>
+          <select id="r-size">
+            <option value="1-5">1–5 employees</option>
+            <option value="6-15" selected>6–15 employees</option>
+            <option value="16-50">16–50 employees</option>
+            <option value="50+">50+ employees</option>
+          </select>
+        </div>
+        <button class="btn" id="reg-btn" onclick="register()">Start Free Trial →</button>
+      </div>
+      <div class="success" id="success-wrap">
+        <div class="icon">🎉</div>
+        <h2>You're all set!</h2>
+        <p>Your 14-day trial has been activated. Use the credentials below to log in.</p>
+        <div class="creds">
+          <div>Email: <span id="s-email"></span></div>
+          <div>Password: <span id="s-pass"></span></div>
+          <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.4);">Save these credentials — you won't see them again.</div>
+        </div>
+        <a href="/login.html" class="login-btn">Go to Login →</a>
+      </div>
+    </div>
+
+    <!-- TAB: PRICING -->
+    <div class="tab-pane" id="tab-pricing">
+      <h1 style="margin-bottom:8px;">Plans & Pricing</h1>
+      <p class="sub">Simple pricing, no surprises. All plans include full access.</p>
+      <div class="info-box">
+        <h3>✦ What's included in every plan</h3>
+        <ul>
+          <li>Schedule & project management</li>
+          <li>Time tracking & approval workflow</li>
+          <li>Crew & vehicle assignment</li>
+          <li>Pull sheets & PDF export</li>
+          <li>Unlimited projects</li>
+          <li>Mobile-friendly interface</li>
+        </ul>
+      </div>
+      <div class="plan-grid">
+        <div class="plan">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">Up to 10 users</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;">Contact us for pricing</div>
+        </div>
+        <div class="plan featured">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">Up to 30 users</div>
+          <div style="font-size:11px;color:rgba(201,168,76,.6);margin-top:6px;">Most popular</div>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Business</div>
+          <div class="plan-price">Up to 100 users</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;">Contact us for pricing</div>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">Unlimited users</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;">Custom pricing</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;text-align:center;">
+        <p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:12px;">Pricing is billed monthly. Contact us for exact rates and custom plans.</p>
+        <button class="btn" onclick="showTab('contact')">Get Pricing Info →</button>
+      </div>
+    </div>
+
+    <!-- TAB: CONTACT -->
+    <div class="tab-pane" id="tab-contact">
+      <h1 style="margin-bottom:8px;">Get in touch</h1>
+      <p class="sub">Questions about pricing, features or your trial? We'll get back to you within 24 hours.</p>
+      <div class="err" id="contact-err"></div>
+      <div id="contact-success" style="display:none;text-align:center;padding:20px 0;">
+        <div style="font-size:40px;margin-bottom:12px;">✉️</div>
+        <h2 style="margin-bottom:8px;">Message sent!</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,.5);">We'll get back to you as soon as possible.</p>
+      </div>
+      <div id="contact-form-wrap" class="contact-form">
+        <div class="fg"><label>Your Name *</label><input type="text" id="c-name" placeholder="James Mitchell" maxlength="80"></div>
+        <div class="fg"><label>Email *</label><input type="email" id="c-email" placeholder="you@company.com" maxlength="120"></div>
+        <div class="fg"><label>Subject</label>
+          <select id="c-subject">
+            <option value="Pricing inquiry">Pricing inquiry</option>
+            <option value="Plan upgrade">Plan upgrade after trial</option>
+            <option value="Feature question">Feature question</option>
+            <option value="Technical support">Technical support</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message *</label><textarea class="fi" id="c-msg" placeholder="Tell us how we can help..." maxlength="1000" style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 14px;font-size:14px;color:#fff;font-family:'Outfit',sans-serif;outline:none;resize:vertical;min-height:90px;"></textarea></div>
+        <button class="btn" id="contact-btn" onclick="sendContact()">Send Message →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Already have an account? <a href="/login.html">Sign in</a> &nbsp;·&nbsp; © 2026 StageLog · PJ, Malta
+  </div>
+</div>
+
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+name).classList.add('active');
+  var btns=document.querySelectorAll('.tab-btn');
+  var idx={trial:0,pricing:1,contact:2}[name]||0;
+  btns[idx].classList.add('active');
+}
+
+// Open contact tab if #contact in URL
+if(location.hash==='#contact') showTab('contact');
+
+async function sendContact(){
+  var name=document.getElementById('c-name').value.trim();
+  var email=document.getElementById('c-email').value.trim();
+  var subject=document.getElementById('c-subject').value;
+  var msg=document.getElementById('c-msg').value.trim();
+  var errEl=document.getElementById('contact-err');
+  errEl.style.display='none';
+  if(!name||!email||!msg){errEl.textContent='Please fill in all required fields.';errEl.style.display='block';return;}
+  var btn=document.getElementById('contact-btn');
+  btn.disabled=true;btn.textContent='Sending...';
+  try{
+    var res=await fetch('/api/auth/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,subject,message:msg})});
+    var data=await res.json();
+    if(!res.ok){errEl.textContent=data.error||'Failed to send. Please try again.';errEl.style.display='block';btn.disabled=false;btn.textContent='Send Message →';return;}
+    document.getElementById('contact-form-wrap').style.display='none';
+    document.getElementById('contact-success').style.display='block';
+  }catch(e){errEl.textContent='Network error. Please try again.';errEl.style.display='block';btn.disabled=false;btn.textContent='Send Message →';}
+}
+
+async function tryDemo(){
+  var btn=document.getElementById('demo-btn');
+  btn.disabled=true;
+  btn.textContent='Loading demo...';
+  try{
+    var res=await fetch('/api/auth/demo',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'}});
+    var data=await res.json();
+    if(res.ok){
+      window.location.href='/';
+    } else {
+      btn.disabled=false;
+      btn.innerHTML='▶ Try Live Demo — no signup needed';
+      alert(data.error||'Demo not available right now. Please try again.');
+    }
+  }catch(e){
+    btn.disabled=false;
+    btn.innerHTML='▶ Try Live Demo — no signup needed';
+    alert('Connection error. Please try again.');
+  }
+}
+
+async function register(){
+  var company = document.getElementById('r-company').value.trim();
+  var name    = document.getElementById('r-name').value.trim();
+  var email   = document.getElementById('r-email').value.trim().toLowerCase();
+  var size    = document.getElementById('r-size').value;
+  var errEl   = document.getElementById('err-msg');
+  errEl.style.display='none';
+
+  if(!company){showErr('Company name is required.');return;}
+  if(!name){showErr('Your name is required.');return;}
+  if(!email||!email.includes('@')){showErr('A valid email is required.');return;}
+
+  var btn=document.getElementById('reg-btn');
+  btn.disabled=true;
+  btn.textContent='Creating your account...';
+
+  try {
+    var res = await fetch('/api/auth/register', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({company, name, email, size})
+    });
+    var data = await res.json();
+    if(!res.ok){showErr(data.error||'Something went wrong. Please try again.');btn.disabled=false;btn.textContent='Start Free Trial →';return;}
+
+    // Show success
+    document.getElementById('form-wrap').style.display='none';
+    document.getElementById('s-email').textContent=email;
+    document.getElementById('s-pass').textContent=data.password;
+    document.getElementById('success-wrap').style.display='block';
+  } catch(e){
+    showErr('Network error. Please try again.');
+    btn.disabled=false;
+    btn.textContent='Start Free Trial →';
+  }
+}
+
+function showErr(msg){
+  var el=document.getElementById('err-msg');
+  el.textContent=msg;
+  el.style.display='block';
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter') register();
+});
+</script>
+</body>
+</html>

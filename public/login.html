@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>StageLog — Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--accent:#C9A84C;--bg:rgba(255,255,255,.07);--surface:rgba(255,255,255,.08);--border:rgba(255,255,255,.12);--text:#ffffff;--text2:rgba(255,255,255,.5);--red:#fca5a5;--gold:#C9A84C;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Outfit',sans-serif;background:linear-gradient(135deg,#0f0f0f 0%,#1a1a2e 50%,#16213e 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;}
+  /* Watermark bg */
+  body::before{content:'';position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M20 30 L20 170 L100 140 L180 170 L180 30 Z' fill='none' stroke='%23ffffff' stroke-width='6' stroke-linejoin='round'/%3E%3Cpath d='M20 30 Q100 80 180 30' fill='none' stroke='%23ffffff' stroke-width='6'/%3E%3Ccircle cx='100' cy='105' r='22' fill='%231A1917'/%3E%3Cpath d='M100 83 L100 60' stroke='%23F0EEE9' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M82 92 L62 72' stroke='%23F0EEE9' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M118 92 L138 72' stroke='%23F0EEE9' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:340px;opacity:.04;pointer-events:none;z-index:0;}
+  .box{background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:44px 40px;width:100%;max-width:400px;position:relative;z-index:1;}
+  .logo{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+  .logo-icon{width:48px;height:48px;background:#1A1917;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-text{font-size:20px;font-weight:700;letter-spacing:-.4px;color:#fff;}
+  .logo-sub{font-size:11px;color:var(--text2);letter-spacing:.6px;text-transform:uppercase;margin-top:2px;}
+  h1{font-size:22px;font-weight:700;margin-bottom:6px;color:#fff;}
+  .sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px;}
+  .tabs{display:flex;gap:0;background:rgba(255,255,255,.05);border-radius:10px;padding:3px;margin-bottom:22px;}
+  .tab{flex:1;padding:7px;text-align:center;font-size:13px;font-weight:500;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.4);transition:all .15s;}
+  .tab.active{background:rgba(201,168,76,.2);color:#C9A84C;box-shadow:none;}
+  label{font-size:12px;font-weight:500;color:rgba(255,255,255,.6);display:block;margin-bottom:5px;}
+  input{width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:border-color .15s;margin-bottom:16px;background:rgba(255,255,255,.07);color:#fff;}
+  input:focus{border-color:rgba(201,168,76,.6);background:rgba(255,255,255,.1);box-shadow:none;}
+  button{width:100%;padding:12px;background:linear-gradient(135deg,#C9A84C,#e8c56a);color:#1a1a2e;border:none;border-radius:10px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:opacity .2s;margin-top:4px;letter-spacing:.2px;}
+  button:hover{opacity:.9;}button:disabled{background:#999;cursor:not-allowed;}
+  .err{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none;}
+  .foot{margin-top:20px;text-align:center;font-size:12px;color:var(--text2);}
+  .pane{display:none;}.pane.active{display:block;}
+</style>
+</head>
+<body>
+<div id="login-bg-img" style="position:fixed;inset:0;background-size:cover;background-position:center;opacity:0.18;pointer-events:none;z-index:0;display:none;"></div>
+<div class="box">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="28" height="28" viewBox="0 0 58 58" fill="none">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#EDD06E"/>
+            <stop offset="100%" stop-color="#B8880E"/>
+          </linearGradient>
+          <filter id="lglow"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <rect x="36" y="11" width="5.5" height="27" rx="2.75" fill="url(#lg)" filter="url(#lglow)"/>
+        <rect x="36" y="33" width="11" height="5.5" rx="2.75" fill="url(#lg)" filter="url(#lglow)"/>
+        <path d="M12 20 Q12 10 23 10 Q36 10 36 19 Q36 28 23 28 Q10 28 10 37 Q10 46 23 46 Q33 46 35 49" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+        <path d="M12 20 Q12 10 23 10 Q36 10 36 19 Q36 28 23 28 Q10 28 10 37 Q10 46 23 46 Q33 46 35 49" fill="none" stroke="#FFF8E8" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text">StageLog</div>
+      <div class="logo-sub">by PJ</div>
+    </div>
+  </div>
+  <h1>Welcome back</h1>
+  <p class="sub">Sign in to continue.</p>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('email')">Email</div>
+    <div class="tab" onclick="switchTab('badge')">Badge ID</div>
+  </div>
+  <div class="err" id="err"></div>
+  <div class="pane active" id="pane-email">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="your@email.com" autocomplete="email">
+  </div>
+  <div class="pane" id="pane-badge">
+    <label>Badge ID</label>
+    <input type="text" id="badge" placeholder="e.g. SL-001" autocomplete="off">
+  </div>
+  <label>Password</label>
+  <input type="password" id="pass" placeholder="••••••••" autocomplete="current-password">
+  <button id="btn" onclick="login()">Sign In</button>
+  <div class="foot">
+    <a href="/register.html" style="color:#C9A84C;font-weight:700;text-decoration:none;background:rgba(201,168,76,.15);padding:4px 10px;border-radius:6px;border:1px solid rgba(201,168,76,.3);">Start free trial</a> &nbsp;·&nbsp;
+    <a href="/register.html#contact" style="color:#6B6860;text-decoration:none;">Contact us</a>
+    <div style="margin-top:8px;">StageLog © 2026 · PJ, Malta</div>
+  </div>
+</div>
+<script>
+  var loginMode='email';
+  function switchTab(mode){
+    loginMode=mode;
+    document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('active',(mode==='email'&&i===0)||(mode==='badge'&&i===1));});
+    document.getElementById('pane-email').classList.toggle('active',mode==='email');
+    document.getElementById('pane-badge').classList.toggle('active',mode==='badge');
+    document.getElementById('err').style.display='none';
+  }
+  fetch('/api/auth/me',{credentials:'include'}).then(r=>r.ok&&(location.href='/'));
+  document.addEventListener('keydown',e=>e.key==='Enter'&&login());
+  // Apply branding
+  (async function(){
+    try{
+      var r=await fetch('/api/settings/branding');
+      var d=await r.json();
+      if(d.bg_image){
+        var el=document.getElementById('login-bg-img');
+        el.style.backgroundImage='url('+d.bg_image+')';
+        el.style.opacity='0.2';
+        el.style.display='block';
+      }
+    }catch(e){}
+  })();
+  async function login(){
+    const pass=document.getElementById('pass').value;
+    const err=document.getElementById('err');
+    const btn=document.getElementById('btn');
+    err.style.display='none';
+    var body={password:pass};
+    if(loginMode==='email'){
+      const email=document.getElementById('email').value.trim();
+      if(!email||!pass){err.textContent='Please enter email and password.';err.style.display='block';return;}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email address.';err.style.display='block';return;}
+      body.email=email;
+    } else {
+      const badge=document.getElementById('badge').value.trim();
+      if(!badge||!pass){err.textContent='Please enter badge ID and password.';err.style.display='block';return;}
+      body.badge_number=badge;
+    }
+    btn.textContent='Signing in...';btn.disabled=true;
+    try{
+      const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(body)});
+      const d=await r.json();
+      if(r.ok){location.href='/';}
+      else{err.textContent=d.error||'Invalid credentials.';err.style.display='block';}
+    }catch(e){err.textContent='Connection error.';err.style.display='block';}
+    btn.textContent='Sign In';btn.disabled=false;
+  }
+</script>
+</body>
+</html>
