@@ -1,4 +1,3 @@
-```sql
 -- ==========================================
 -- DEMO TENANT SEED DATA
 -- AV Productions Demo Company
@@ -201,3 +200,38 @@ SELECT
 p.id,
 CURRENT_DATE - INTERVAL '10 days',
 e.id, e.name, ps.av_role,
+ps.hours_worked, ps.overtime, ps.notes, 2,
+(SELECT id FROM employees WHERE email = 'james@avproductions.co.uk' AND tenant_id = 2 LIMIT 1)
+FROM projects p
+CROSS JOIN (
+VALUES
+('james@avproductions.co.uk', 'Project Manager', 7.5, 0.0, 'Managed full event'),
+('mike@avproductions.co.uk', 'Audio Engineer', 6.5, 0.5, 'Live mix + broadcast'),
+('emma@avproductions.co.uk', 'Lighting Tech', 5.5, 0.0, 'Stage lighting'),
+('alex@avproductions.co.uk', 'Camera Op', 5.0, 0.0, 'Camera 2'),
+('sophie@avproductions.co.uk', 'Video Operator', 4.5, 0.0, 'Live switching'),
+('tom@freelance.com', 'Sound Tech', 5.0, 0.0, 'Monitor mixing')
+) ps(email, av_role, hours_worked, overtime, notes)
+JOIN employees e ON e.email = ps.email AND e.tenant_id = 2
+WHERE p.name = 'NHS Awards Ceremony' AND p.tenant_id = 2
+ON CONFLICT DO NOTHING;
+
+-- 11. ABSENCES
+INSERT INTO absences (employee_id, tenant_id, start_date, end_date, type, note, created_by)
+SELECT
+e.id, 2, ab.start_date::date, ab.end_date::date, ab.type, ab.note,
+(SELECT id FROM employees WHERE email = 'sarah@avproductions.co.uk' AND tenant_id = 2 LIMIT 1)
+FROM (
+VALUES
+('tom@freelance.com',         CURRENT_DATE - INTERVAL '20 days', CURRENT_DATE - INTERVAL '18 days', 'sick',     'Flu - doctor''s note provided'),
+('emma@avproductions.co.uk',  CURRENT_DATE - INTERVAL '5 days',  CURRENT_DATE - INTERVAL '3 days',  'sick',     'Migraine'),
+('alex@avproductions.co.uk',  CURRENT_DATE + INTERVAL '10 days', CURRENT_DATE + INTERVAL '17 days', 'vacation', 'Annual leave - pre-approved'),
+('sophie@avproductions.co.uk',CURRENT_DATE + INTERVAL '5 days',  CURRENT_DATE + INTERVAL '6 days',  'day_off',  'Personal day'),
+('mike@avproductions.co.uk',  CURRENT_DATE - INTERVAL '2 days',  CURRENT_DATE - INTERVAL '2 days',  'internal', 'Warehouse stock check'),
+('lisa@techcrew.co.uk',       CURRENT_DATE + INTERVAL '30 days', CURRENT_DATE + INTERVAL '44 days', 'vacation', 'Summer holiday'),
+('james@avproductions.co.uk', CURRENT_DATE - INTERVAL '30 days', CURRENT_DATE - INTERVAL '28 days', 'sick',     'Back injury')
+) ab(email, start_date, end_date, type, note)
+JOIN employees e ON e.email = ab.email AND e.tenant_id = 2
+ON CONFLICT DO NOTHING;
+
+COMMIT;

@@ -91,7 +91,19 @@ async function setupDatabase() {
         created_at    TIMESTAMP DEFAULT NOW()
       );
 
-    `);
+    CREATE TABLE IF NOT EXISTS absences (
+  id          SERIAL PRIMARY KEY,
+  employee_id INTEGER NOT NULL REFERENCES employees(id) ON DELETE CASCADE,
+  tenant_id   INTEGER,
+  start_date  DATE NOT NULL,
+  end_date    DATE NOT NULL,
+  type        VARCHAR(30) NOT NULL DEFAULT 'day_off'
+              CHECK (type IN ('sick','vacation','internal','day_off')),
+  note        TEXT,
+  created_by  INTEGER REFERENCES employees(id),
+  created_at  TIMESTAMP DEFAULT NOW()
+);
+`);
     console.log('✅ Tables created.');
 
     const ptCount = await client.query('SELECT COUNT(*) FROM project_types');
