@@ -122,7 +122,7 @@ router.post('/demo', async (req, res) => {
   try {
     // Get demo user
     const r = await pool.query(
-      "SELECT * FROM employees WHERE email='james@apexlive.com' AND active=TRUE LIMIT 1"
+      "SELECT * FROM employees WHERE email='james@avproductions.co.uk' AND active=TRUE LIMIT 1"
     );
     const user = r.rows[0];
     if (!user) return res.status(503).json({ error: 'Demo account not available.' });
